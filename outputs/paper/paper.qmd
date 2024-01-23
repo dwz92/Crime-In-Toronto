@@ -1,0 +1,172 @@
+---
+title: "Rapid increase of crimes in Toronto since 2023, "
+author: "Emma Teng"
+date: format(Sys.time(), '%d %m %Y')
+abstract: "This is paper studies the data from Neighbourhood Crime Rates on opendatatoronto, and provides a visualization of historical data."
+thanks: "Code and data are available at:https://github.com/dwz92/Crime-In-Toronto"
+bibliography: bibliography.bib
+format: html
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(opendatatoronto)
+library(dplyr)
+library(sf)
+library(here)
+library(ggplot2)
+library(readr)
+
+#gather neighbourhoods data from: 
+#https://sharlagelfand.github.io/opendatatoronto/articles/articles/spatial_data.html
+#https://github.com/chan-roy/VehicleSpeedsToronto/blob/main/scripts/01-data_cleaning.R
+
+# get package
+package <- show_package("neighbourhoods")
+
+# get all resources for this package
+resources <- list_package_resources("neighbourhoods")
+
+# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources
+datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))
+
+# load the first datastore resource as a sample
+neighbourhoods <- filter(datastore_resources, row_number()==1) %>% get_resource()
+
+top_density <- read_csv(here::here("inputs/data/top_density.csv"),
+                        show_col_types = FALSE)
+
+tot_density <- read_csv(here::here("inputs/data/tot_density.csv"),
+                        show_col_types = FALSE)
+```
+
+
+# Introduction
+
+# Data
+
+```{r echo=FALSE, fig.cap="Scatter plot of Toronto's 2023 crime density distribution",}
+                        
+ggplot(tot_density, aes(x = POPULATION_2023, y = crime_dense)) + 
+  geom_point() +
+  scale_x_continuous() +
+  labs(title = 'Crime Density vs. Population', x = 'Population', y = 'Density')
+```
+
+Though there isn't a clear trend demonstrated on this graph, there are relevant information within the groupings of scattered points. It is worth noting that high crime density dots appears more often with large population, and the dots with zero density appears more often on the less side of the population spectrum than higher population
+
+```{r echo=FALSE, warning=FALSE }
+
+ggplot(neighbourhoods) +
+  geom_sf(aes(fill = tot_density$crime_dense)) +
+  geom_sf_text(aes(label = top_density$HOOD_ID), color = 'white', size = 2) +
+  scale_fill_gradient(low = '#d6b5b4', high = '#851a18') +
+  labs(title = 'Intensity of Toronto\'s 2023 crimes compared to past 5 years',
+       x = '', 
+       y = '', 
+       fill = 'Density') +
+  theme_void()
+
+```
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(neighbourhoods) +
+  geom_sf(aes(fill = tot_density$POPULATION_2023)) +
+  geom_sf_text(aes(label = top_density$HOOD_ID), color = 'white', size = 2) +
+  scale_fill_gradient(low = 'lightblue', high = 'darkblue') +
+  labs(title = '2023 Population in Toronto',
+       x = '', 
+       y = '', 
+       fill = 'Population') +
+  theme_void()
+
+```
+
+
+
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(neighbourhoods) +
+  geom_sf(aes(fill = top_density$assult_den)) +
+  geom_sf_text(aes(label = top_density$HOOD_ID), color = 'white', size = 2) +
+  scale_fill_gradient(low = '#d6b5b4', high = '#851a18') +
+  labs(title = 'Intensity of Toronto\'s 2023 assaults compared to past 5 years',
+       x = '', 
+       y = '', 
+       fill = 'Density') +
+  theme_void()
+```
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(neighbourhoods) +
+  geom_sf(aes(fill = top_density$autotheft_den)) +
+  geom_sf_text(aes(label = top_density$HOOD_ID), color = 'white', size = 2) +
+  scale_fill_gradient(low = '#d6b5b4', high = '#851a18') +
+  labs(title = 'Intensity of Toronto\'s 2023 autothefts compared to past 5 years',
+       x = '', 
+       y = '', 
+       fill = 'Density') +
+  theme_void()
+```
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(neighbourhoods) +
+  geom_sf(aes(fill = top_density$theftfrommv_den)) +
+  geom_sf_text(aes(label = top_density$HOOD_ID), color = 'white', size = 2) +
+  scale_fill_gradient(low = '#d6b5b4', high = '#851a18') +
+  labs(title = 'Intensity of Toronto\'s 2023 thefts from MV compared to past 5 years',
+       x = '', 
+       y = '', 
+       fill = 'Density',
+       caption="In this case, MV represents motor vehicle") +
+  theme_void()
+```
+
+
+To elaborate on this finding further, we will visualize the amount of assults, autotheft, theft from vehicle committed in 2023.
+
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(neighbourhoods) +
+  geom_sf(aes(fill = top_density$ASSAULT_2023)) +
+  geom_sf_text(aes(label = top_density$HOOD_ID), color = 'white', size = 2) +
+  scale_fill_gradient(low = '#d6b5b4', high = '#851a18') +
+  labs(title = 'Assaults in Toronto 2023',
+       x = '', 
+       y = '', 
+       fill = 'Assaults Cases') +
+  theme_void()
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(neighbourhoods) +
+  geom_sf(aes(fill = top_density$AUTOTHEFT_2023)) +
+  geom_sf_text(aes(label = top_density$HOOD_ID), color = 'white', size = 2) +
+  scale_fill_gradient(low = '#d6b5b4', high = '#851a18') +
+  labs(title = 'Autotheft in Toronto 2023',
+       x = '', 
+       y = '', 
+       fill = 'Autotheft Cases') +
+  theme_void()
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(neighbourhoods) +
+  geom_sf(aes(fill = top_density$THEFTFROMMV_2023)) +
+  geom_sf_text(aes(label = top_density$HOOD_ID), color = 'white', size = 2) +
+  scale_fill_gradient(low = '#d6b5b4', high = '#851a18') +
+  labs(title = 'Theft from MV in Toronto 2023',
+       x = '', 
+       y = '', 
+       fill = 'Theft from MV Cases') +
+  theme_void()
+```
+
+
+
+# References
+
