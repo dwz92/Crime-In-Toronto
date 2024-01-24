@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Emma Teng">
+<meta name="dcterms.date" content="2024-01-23">
 
-<title>Rapid increase of crimes in Toronto since 2023,</title>
+<title>Rapid increase of crimes in Toronto since 2023, a result of post-covid era.</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -46,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Rapid increase of crimes in Toronto since 2023,</h1>
+<h1 class="title">Rapid increase of crimes in Toronto since 2023, a result of post-covid era.</h1>
 </div>
 
 
@@ -63,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">January 23, 2024</p>
     </div>
   </div>
   
@@ -73,60 +74,146 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="abstract">
     <div class="abstract-title">Abstract</div>
-    This is paper studies the data from Neighbourhood Crime Rates on opendatatoronto, and provides a visualization of historical data.
+    Major cities in North America tend to have serious public safety issues compared to rural areas. Like most highly populated urban areas, Toronto has faced increasing crime rates in recent years. To further understand this issue, we will investigate the crime data provided by Toronto Police Services on Open Data Toronto. This dataset includes the count for Assault, Auto Theft, Break and Enter, Robbery, Theft Over, Homicide and Shooting &amp; Firearm Discharges from 2014 to 2023. We gathered these data and computed the overall intensity of crimes in 2023 compared to the range between 2018 and 2022. Though crime density is significantly high in 2023, the comparison between the actual amount of crimes committed in 2023 and the pre-covid era suggests that crime rates in 2023 are returning to the pre-covid era.
   </div>
 </div>
 
 </header>
 
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>As the largest city in Canada, the city of Toronto has emerged as a unique and valuable study case for crime and assessment of effective intervention strategies. Toronto as one of the major cities in North America, has a considerable population density and complexity, these features allow Toronto to present a microscopic view of greater trends and studies. Moreover, the municipality of Toronto encourages transparency and provides online databases such as Open Data Toronto that are accessible to everyone. The database includes valuable and extensive crime statistics, which are fundamental for empirical scrutiny. Nonetheless, this enables a granular examination of criminal incidents across the city’s diverse neighborhoods.</p>
+<p>On the Open Data Toronto platform, Toronto Police Services provided thorough crime data of Toronto from 2014 to 2023. These data include counts of Assault, Auto Theft, Break and Enter, Robbery, Theft Over, Homicide and Shooting &amp; Firearm Discharges in Toronto over the years. Moreover, the Toronto Police Services also took accounts of the population estimates by Environics Analytics to compute the crime rate per 100,000 population. With this data set, the objective of this paper is to identify criminal trends and enhance the precision of crime prevention strategies.</p>
+</section>
 <section id="data" class="level1">
 <h1>Data</h1>
+<p>We use “neighbourhood-crime-rates” as our primary dataset, which was retrived from the Open Data Toronto portal. In this dataset, the crime counts and crime rate of all 158 city areas in Toronto from 2014-2023 is included.Moreover, each crime’s geometry on the Toronto map is recorded in the ‘geometry’ column. Another dataset we retrived from Open Data Toronto portal is “neighbourhood”. Which provides the complete geometry data needed to visualize all of Toronto’s city area. Since the datasets consists of detailed data, it would be inefficient to visaulize all data. Thus we will aim to analyze the crime data between 2019 and 2023 inclusively.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 1: Scatter plot of Toronto’s 2023 crime density distribution</figcaption>
+</figure>
 </div>
 </div>
+</div>
+<p>This scatter plot is visualized through calculating the density of 2023 crime data in the past 5 years. Though there isn’t a clear trend demonstrated on this graph, there are relevant information within the groupings of scattered points. It is worth noting that high crime density dots appears more often with large population, and the dots with zero density appears more often on the less side of the population spectrum than higher population.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 2: Geographical visualization of Toronto’s crime density from 2023-2019</figcaption>
+</figure>
 </div>
 </div>
+</div>
+<p>To visualize this finding further, we visualize the previous relation in a geographical way organized by city areas and crime density. As</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 3: Geographical visualization of Toronto’s population in 2023</figcaption>
+</figure>
 </div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>To elaborate on this finding further, we will visualize the amount of assults, autotheft, theft from vehicle committed in 2023.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 4.1: Geographical visualization of Toronto’s assualt cases in 2023</figcaption>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 4.2: Geographical visualization of Toronto’s autotheft cases in 2023</figcaption>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="paper_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 4.3: Geographical visualization of Toronto’s thefts from MV in 2023</figcaption>
+</figure>
 </div>
 </div>
+</div>
+<p>However, as we analyze the historical data further, we realized simlarities in the visualizations between 2019 and 2023</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 5.1: Geographical visualization of Toronto’s assualt cases in 2019</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 5.2: Geographical visualization of Toronto’s autotheft cases in 2019</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 5.3: Geographical visualization of Toronto’s thefts from MV in 2019</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To understand this unique trend, we will cross reference the crime density in 2023 compared to the past 5 years.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 6.1: Geographical visualization of Toronto’s assualt cases in 2023</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 6.2: Geographical visualization of Toronto’s autotheft cases in 2023</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure 6.3: Geographical visualization of Toronto’s theft from MV cases in 2023</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The clear increase in crime density suggests that in more recent years than 2019, crime rates have dropped significantly due to some reason. Yet integrading recent social changes and world events, a reasonalble hypothesis would be the decrease in personnel turnover in 2023 compared to covid era.</p>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
