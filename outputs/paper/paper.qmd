@@ -1,11 +1,13 @@
 ---
-title: "Rapid increase of crimes in Toronto since 2023, a result of post-covid era."
+title: "Rapid increase of crimes in Toronto since 2023: A result of post-covid era."
 author: "Emma Teng"
 date: "`r format(Sys.time(), '%d %m %Y')`"
 abstract: "Major cities in North America tend to have serious public safety issues compared to rural areas. Like most highly populated urban areas, Toronto has faced increasing crime rates in recent years. To further understand this issue, we will investigate the crime data provided by Toronto Police Services on Open Data Toronto. This dataset includes the count for Assault, Auto Theft, Break and Enter, Robbery, Theft Over, Homicide and Shooting & Firearm Discharges from 2014 to 2023. We gathered these data and computed the overall intensity of crimes in 2023 compared to the range between 2018 and 2022. Though crime density is significantly high in 2023, the comparison between the actual amount of crimes committed in 2023 and the pre-covid era suggests that crime rates in 2023 are returning to the pre-covid era."
-thanks: "Code and data are available at:https://github.com/dwz92/Crime-In-Toronto"
-bibliography: [bibliography.bib]
-format: html
+thanks: "Code and data are available at: https://github.com/dwz92/Crime-In-Toronto"
+format:
+  pdf: 
+    fig-pos: "H"
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -47,7 +49,7 @@ On the Open Data Toronto platform, Toronto Police Services provided thorough cri
 
 # Data
 
-We use "neighbourhood-crime-rates" as our primary dataset, which was retrived from the Open Data Toronto portal. In this dataset, the crime counts and crime rate of all 158 city areas in Toronto from 2014-2023 is included.Moreover, each crime's geometry on the Toronto map is recorded in the 'geometry' column. Another dataset we retrived from Open Data Toronto portal is "neighbourhood". Which provides the complete geometry data needed to visualize all of Toronto's city area. Since the datasets consists of detailed data, it would be inefficient to visaulize all data. Thus we will aim to analyze the crime data between 2019 and 2023 inclusively.
+This paper is written using R and other libraries such as 'tidyverse', 'dplyr', and 'here' are used to manipuate data [@citeR, @citeDplyr, @citeTidy, @citeHere]. We use "neighbourhood-crime-rates" as our primary dataset, which was retrived from the Open Data Toronto portal [@citeOpendata]. In this dataset, the crime counts and crime rate of all 158 city areas in Toronto from 2014-2023 is included. Moreover, each crime's geometry on the Toronto map is recorded in the 'geometry' column. Another dataset we retrived from Open Data Toronto portal is "neighbourhood". Which provides the complete geometry data needed to visualize all of Toronto's city area. Since the datasets consists of detailed data, it would be inefficient to visaulize all data. Thus we will aim to analyze the crime data between 2019 and 2023 inclusively, and use libraries 'sf' and 'ggplot2' [@citeSF, @citeGGPlot] to visualize these data.
 
 ```{r echo=FALSE, fig.cap="Figure 1: Scatter plot of Toronto's 2023 crime density distribution"}
                         
@@ -57,7 +59,9 @@ ggplot(tot_density, aes(x = POPULATION_2023, y = crime_dense)) +
   labs(title = 'Crime Density vs. Population', x = 'Population', y = 'Density')
 ```
 
+
 This scatter plot is visualized through calculating the density of 2023 crime data in the past 5 years. Though there isn't a clear trend demonstrated on this graph, there are relevant information within the groupings of scattered points. It is worth noting that high crime density dots appears more often with large population, and the dots with zero density appears more often on the less side of the population spectrum than higher population.
+
 
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 2: Geographical visualization of Toronto's crime density from 2023-2019"}
 
@@ -70,10 +74,10 @@ ggplot(neighbourhoods) +
        y = '', 
        fill = 'Density') +
   theme_void()
-
 ```
 
-To visualize this finding further, we visualize the previous relation in a geographical way organized by city areas and crime density. As 
+
+To visualize this finding further, we visualize the previous relation in a geographical way organized by city areas and crime density. As demonstrated in this visualization, darker city areas such as 1 and 42 stands out with the rest of the dataset. This indicates an increase in intensity of crime compare to previous years.
 
 
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 3: Geographical visualization of Toronto's population in 2023"}
@@ -87,11 +91,10 @@ ggplot(neighbourhoods) +
        y = '', 
        fill = 'Population') +
   theme_void()
-
 ```
 
 
-To elaborate on this finding further, we will visualize the amount of assults, autotheft, theft from vehicle committed in 2023.
+To elaborate on this finding further, we visualized the 2023 Toronto population by city areas. As shown in the visualization above, high crime density city areas and high populaiton areas demonstrates a rather intuitive similarity. In this similarity, high population city areas tend to have high crime density in 2023. This implies, population is proportional to increase crime.
 
 
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 4.1: Geographical visualization of Toronto's assualt cases in 2023"}
@@ -105,7 +108,6 @@ ggplot(neighbourhoods) +
        fill = 'Assaults Cases') +
   theme_void()
 ```
-
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 4.2: Geographical visualization of Toronto's autotheft cases in 2023"}
 ggplot(neighbourhoods) +
   geom_sf(aes(fill = top_density$AUTOTHEFT_2023)) +
@@ -117,7 +119,6 @@ ggplot(neighbourhoods) +
        fill = 'Autotheft Cases') +
   theme_void()
 ```
-
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 4.3: Geographical visualization of Toronto's thefts from MV in 2023"}
 ggplot(neighbourhoods) +
   geom_sf(aes(fill = top_density$THEFTFROMMV_2023)) +
@@ -131,7 +132,8 @@ ggplot(neighbourhoods) +
 ```
 
 
-However, as we analyze the historical data further, we realized simlarities in the visualizations between 2019 and 2023
+To investigate deeper into our findings, we will analyze the top 3 most committed crime in 2023. Through simple computing of the raw count of each crime in 2023, we were able to derive the top 3 committed crimes. In Figure 4.1, 4.2, and 4.3, the raw count of Assults, Autotheft, and Theft from Motor Vehicle are being displayed geographically.From figures 4.1, 4.2, and 4.3, it is demonstrated that city areas with high count of crimes shows a direct correlation with city areas with high population (Figure 3). This similarity suggests that as we enter post-covid era, crimes have increase rapidly in highly populated areas.
+
 
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 5.1: Geographical visualization of Toronto's assualt cases in 2019"}
 ggplot(neighbourhoods) +
@@ -144,7 +146,6 @@ ggplot(neighbourhoods) +
        fill = 'Assaults Cases') +
   theme_void()
 ```
-
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 5.2: Geographical visualization of Toronto's autotheft cases in 2019"}
 ggplot(neighbourhoods) +
   geom_sf(aes(fill = top_density$AUTOTHEFT_2019)) +
@@ -156,7 +157,6 @@ ggplot(neighbourhoods) +
        fill = 'Autotheft Cases') +
   theme_void()
 ```
-
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 5.3: Geographical visualization of Toronto's thefts from MV in 2019"}
 ggplot(neighbourhoods) +
   geom_sf(aes(fill = top_density$THEFTFROMMV_2019)) +
@@ -170,7 +170,8 @@ ggplot(neighbourhoods) +
 ```
 
 
-To understand this unique trend, we will cross reference the crime density in 2023 compared to the past 5 years.
+To ensure the integrity of our analysis, we will cross reference the top 3 crime counts in 2023 with the pre-covid crime counts. Figures 5.1, 5.2, and 5.3 are geographical visualization of raw crime counts in 2019. By cross referencing Figures 5.1 to 5.3 with Figures 4.1 to 4.3, it is evidenct that the crime counts in 2023 is at the same level of 2019's crime counts. This suggests that crime rate in Toronto are returning to pre-covid era.
+
 
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 6.1: Geographical visualization of Toronto's assualt cases in 2023"}
 
@@ -184,7 +185,6 @@ ggplot(neighbourhoods) +
        fill = 'Density') +
   theme_void()
 ```
-
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 6.2: Geographical visualization of Toronto's autotheft cases in 2023"}
 
 ggplot(neighbourhoods) +
@@ -197,7 +197,6 @@ ggplot(neighbourhoods) +
        fill = 'Density') +
   theme_void()
 ```
-
 ```{r echo=FALSE, warning=FALSE, fig.cap="Figure 6.3: Geographical visualization of Toronto's theft from MV cases in 2023"}
 
 ggplot(neighbourhoods) +
@@ -212,9 +211,17 @@ ggplot(neighbourhoods) +
   theme_void()
 ```
 
-The clear increase in crime density suggests that in more recent years than 2019, crime rates have dropped significantly due to some reason. Yet integrading recent social changes and world events, a reasonalble hypothesis would be the decrease in personnel turnover in 2023 compared to covid era.
+
+
+To further ensure that the previous analysis is reasonable, we visualized the top 3 crime density in 2023 geographically. The high density in 2023's crime data suggests a clear increase of crime from previous years. Which further completes our analysis as it suggests crime rate during covid era dropped.
 
 
 
+# Conclusion
+From our analysis, the clear increase in crime density suggests that in more recent years than 2019, crime rates have dropped significantly due to some reason. Yet integrading recent social changes and world events, a reasonalble hypothesis would be the decrease in personnel turnover in 2023 compared to covid era. Thus, to provide an explanation for the sudden increase in crime density, it may be because 2023 had higher personnel turnover than 2022. As the majority of Canada are still under the shadow of covid 19 during 2022, many tourism and public services hadn't recovered. However, further investigation of this suggestion need to be studied, as geographical related reasonings could also provide an explaination for the studied trend.
+
+
+
+\newpage
 # References
 

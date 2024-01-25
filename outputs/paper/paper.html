@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Emma Teng">
-<meta name="dcterms.date" content="2024-01-23">
+<meta name="dcterms.date" content="2024-01-24">
 
-<title>Rapid increase of crimes in Toronto since 2023, a result of post-covid era.</title>
+<title>Rapid increase of crimes in Toronto since 2023: A result of post-covid era.</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="paper_files/libs/clipboard/clipboard.min.js"></script>
@@ -47,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Rapid increase of crimes in Toronto since 2023, a result of post-covid era.</h1>
+<h1 class="title">Rapid increase of crimes in Toronto since 2023: A result of post-covid era.</h1>
 </div>
 
 
@@ -64,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 23, 2024</p>
+      <p class="date">January 24, 2024</p>
     </div>
   </div>
   
@@ -87,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="data" class="level1">
 <h1>Data</h1>
-<p>We use “neighbourhood-crime-rates” as our primary dataset, which was retrived from the Open Data Toronto portal. In this dataset, the crime counts and crime rate of all 158 city areas in Toronto from 2014-2023 is included.Moreover, each crime’s geometry on the Toronto map is recorded in the ‘geometry’ column. Another dataset we retrived from Open Data Toronto portal is “neighbourhood”. Which provides the complete geometry data needed to visualize all of Toronto’s city area. Since the datasets consists of detailed data, it would be inefficient to visaulize all data. Thus we will aim to analyze the crime data between 2019 and 2023 inclusively.</p>
+<p>This paper is written using R and other libraries such as ‘tidyverse’, ‘dplyr’, and ‘here’ are used to manipuate data <span class="citation" data-cites="citeR">Müller (<a href="#ref-citeHere" role="doc-biblioref">2020</a>)</span>. We use “neighbourhood-crime-rates” as our primary dataset, which was retrived from the Open Data Toronto portal <span class="citation" data-cites="citeOpendata">(<a href="#ref-citeOpendata" role="doc-biblioref">Gelfand 2022</a>)</span>. In this dataset, the crime counts and crime rate of all 158 city areas in Toronto from 2014-2023 is included. Moreover, each crime’s geometry on the Toronto map is recorded in the ‘geometry’ column. Another dataset we retrived from Open Data Toronto portal is “neighbourhood”. Which provides the complete geometry data needed to visualize all of Toronto’s city area. Since the datasets consists of detailed data, it would be inefficient to visaulize all data. Thus we will aim to analyze the crime data between 2019 and 2023 inclusively, and use libraries ‘sf’ and ‘ggplot2’ <span class="citation" data-cites="citeSF">Wickham (<a href="#ref-citeGGPlot" role="doc-biblioref">2016</a>)</span> to visualize these data.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -109,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>To visualize this finding further, we visualize the previous relation in a geographical way organized by city areas and crime density. As</p>
+<p>To visualize this finding further, we visualize the previous relation in a geographical way organized by city areas and crime density. As demonstrated in this visualization, darker city areas such as 1 and 42 stands out with the rest of the dataset. This indicates an increase in intensity of crime compare to previous years.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -120,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>To elaborate on this finding further, we will visualize the amount of assults, autotheft, theft from vehicle committed in 2023.</p>
+<p>To elaborate on this finding further, we visualized the 2023 Toronto population by city areas. As shown in the visualization above, high crime density city areas and high populaiton areas demonstrates a rather intuitive similarity. In this similarity, high population city areas tend to have high crime density in 2023. This implies, population is proportional to increase crime.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -151,7 +170,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>However, as we analyze the historical data further, we realized simlarities in the visualizations between 2019 and 2023</p>
+<p>To investigate deeper into our findings, we will analyze the top 3 most committed crime in 2023. Through simple computing of the raw count of each crime in 2023, we were able to derive the top 3 committed crimes. In Figure 4.1, 4.2, and 4.3, the raw count of Assults, Autotheft, and Theft from Motor Vehicle are being displayed geographically.</p>
+<p>From figures 4.1, 4.2, and 4.3, it is demonstrated that city areas with high count of crimes shows a direct correlation with city areas with high population (Figure 3). This similarity suggests that as we enter post-covid era, crimes have increase rapidly in highly populated areas.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -182,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>To understand this unique trend, we will cross reference the crime density in 2023 compared to the past 5 years.</p>
+<p>To ensure the integrity of our analysis, we will cross reference the top 3 crime counts in 2023 with the pre-covid crime counts. Figures 5.1, 5.2, and 5.3 are geographical visualization of raw crime counts in 2019. By cross referencing Figures 5.1 to 5.3 with Figures 4.1 to 4.3, it is evidenct that the crime counts in 2023 is at the same level of 2019’s crime counts. This suggests that crime rate in Toronto are returning to pre-covid era.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -213,13 +233,41 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>The clear increase in crime density suggests that in more recent years than 2019, crime rates have dropped significantly due to some reason. Yet integrading recent social changes and world events, a reasonalble hypothesis would be the decrease in personnel turnover in 2023 compared to covid era.</p>
+<p>To further ensure that the previous analysis is reasonable, we visualized the top 3 crime density in 2023 geographically. The high density in 2023’s crime data suggests a clear increase of crime from previous years. Which further completes our analysis as it suggests crime rate during covid era dropped.</p>
 </section>
-<section id="references" class="level1">
-<h1>References</h1>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>From our analysis, the clear increase in crime density suggests that in more recent years than 2019, crime rates have dropped significantly due to some reason. Yet integrading recent social changes and world events, a reasonalble hypothesis would be the decrease in personnel turnover in 2023 compared to covid era. Thus, to provide an explanation for the sudden increase in crime density, it may be because 2023 had higher personnel turnover than 2022. As the majority of Canada are still under the shadow of covid 19 during 2022, many tourism and public services hadn’t recovered.However, further investigation of this suggestion need to be studied, as geographical related reasonings could also provide an explaination for the studied trend.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-citeOpendata" class="csl-entry" role="listitem">
+Gelfand, Sharla. 2022. <em>Opendatatoronto: Access the City of Toronto Open Data Portal</em>. <a href="https://sharlagelfand.github.io/opendatatoronto/">https://sharlagelfand.github.io/opendatatoronto/</a>.
+</div>
+<div id="ref-citeHere" class="csl-entry" role="listitem">
+Müller, Kirill. 2020. <em>Here: A Simpler Way to Find Your Files</em>. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>.
+</div>
+<div id="ref-citeSF" class="csl-entry" role="listitem">
+Pebesma, Edzer, and Roger Bivand. 2023. <em><span class="nocase">Spatial Data Science: With applications in R</span></em>. <span>Chapman and Hall/CRC</span>. <a href="https://r-spatial.org/book/">https://r-spatial.org/book/</a>.
+</div>
+<div id="ref-citeR" class="csl-entry" role="listitem">
+R Core Team. 2021. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-citeGGPlot" class="csl-entry" role="listitem">
+Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div id="ref-citeTidy" class="csl-entry" role="listitem">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+<div id="ref-citeDplyr" class="csl-entry" role="listitem">
+Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and Davis Vaughan. 2023. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://dplyr.tidyverse.org">https://dplyr.tidyverse.org</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
